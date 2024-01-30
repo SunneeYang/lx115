@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/deadblue/elevengo"
 	"github.com/manifoldco/promptui"
-	"github.com/mitchellh/go-homedir"
 	gim "github.com/ozankasikci/go-image-merge"
 	"image/jpeg"
 	"io/ioutil"
@@ -16,6 +15,7 @@ import (
 	"regexp"
 	"runtime"
 	"strconv"
+	"syscall"
 )
 
 var client *elevengo.Client
@@ -50,9 +50,9 @@ func addUrl(writer http.ResponseWriter, request *http.Request) {
 			var captchaSession *elevengo.CaptchaSession
 			captchaSession, err = client.CaptchaStart()
 
-			expectImg, _ := homedir.Expand("~/115_captcha_expect.png")
-			choicesImg, _ := homedir.Expand("~/115_captcha_choices.jpg")
-			mergeImg, _ := homedir.Expand("~/115_captcha.jpg")
+			expectImg := "115_captcha_expect.png"
+			choicesImg := "115_captcha_choices.jpg"
+			mergeImg := "115_captcha.jpg"
 			defer os.Remove(expectImg)
 			defer os.Remove(choicesImg)
 			defer os.Remove(mergeImg)
@@ -88,9 +88,13 @@ func addUrl(writer http.ResponseWriter, request *http.Request) {
 			}
 		}
 
-		fmt.Println(err.Error())
+		if err != nil {
+			fmt.Println(err.Error())
+			http.Error(writer, err.Error(), http.StatusBadRequest)
+		} else {
+			http.Error(writer, "添加失败", http.StatusBadRequest)
+		}
 
-		http.Error(writer, err.Error(), http.StatusBadRequest)
 		return
 	}
 
@@ -113,10 +117,7 @@ func openUrl(url string) error {
 	}
 	args = append(args, url)
 	c := exec.Command(cmd, args...)
-	// 仅在Windows系统上设置HideWindow字段
-	//if runtime.GOOS == "windows" {
-	//	c.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
-	//}
+	c.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
 	return c.Start()
 }
 
@@ -138,10 +139,12 @@ func askCaptcha() (string, error) {
 }
 
 func getCredentials() (uid, cid, seid string) {
-	configFile, err := homedir.Expand("~/115.cookies")
-	if err != nil {
-		panic(err)
-	}
+	//configFile, err := homedir.Expand("~/115.cookies")
+	//if err != nil {
+	//	panic(err)
+	//}
+
+	configFile := "115.cookies"
 
 	if _, err := os.Stat(configFile); os.IsNotExist(err) {
 		panic("请在 home 目录下创建 .115.cookies 文件")

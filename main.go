@@ -16,7 +16,6 @@ import (
 	"regexp"
 	"runtime"
 	"strconv"
-	"syscall"
 )
 
 var client *elevengo.Client
@@ -89,11 +88,9 @@ func addUrl(writer http.ResponseWriter, request *http.Request) {
 			}
 		}
 
-		if err != nil {
-			fmt.Println(err.Error())
-		}
+		fmt.Println(err.Error())
 
-		http.Error(writer, "离线任务添加失败，请打开终端查看详细错误信息", http.StatusBadRequest)
+		http.Error(writer, err.Error(), http.StatusBadRequest)
 		return
 	}
 
@@ -116,7 +113,10 @@ func openUrl(url string) error {
 	}
 	args = append(args, url)
 	c := exec.Command(cmd, args...)
-	c.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
+	// 仅在Windows系统上设置HideWindow字段
+	//if runtime.GOOS == "windows" {
+	//	c.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
+	//}
 	return c.Start()
 }
 
@@ -138,7 +138,7 @@ func askCaptcha() (string, error) {
 }
 
 func getCredentials() (uid, cid, seid string) {
-	configFile, err := homedir.Expand("~/.115.cookies")
+	configFile, err := homedir.Expand("~/115.cookies")
 	if err != nil {
 		panic(err)
 	}

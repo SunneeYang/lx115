@@ -12,12 +12,11 @@ github.com/chzyer/test v0.0.0-20180213035817-a1ea475d72b1 h1:q763qf9huN11kDQavWs
 github.com/chzyer/test v0.0.0-20180213035817-a1ea475d72b1/go.mod h1:Q3SI9o4m/ZMnBNeIyt5eFwwo7qiLfzFZmjNmxjkiQlU=
 github.com/client9/misspell v0.3.4 h1:ta993UF76GwbvJcIo3Y68y/M3WxlpEHPWIGDkJYwzJI=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
+github.com/coolzilj/elevengo v0.0.0-20200101143351-35bb250a1fb3 h1:vSmrL6S15gfPU4DIgwHuU45HDbV3D1rc/A8DZW2CfLY=
 github.com/coolzilj/elevengo v0.0.0-20200101143351-35bb250a1fb3/go.mod h1:cS11LVGBt37d7AMApYcw8Upkv7OqLtc5RB0KDZOHsbU=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/deadblue/elevengo v0.0.0-20191019075919-645c4d1e56bf h1:vD8ayDzaoV+3WszFgjrbu23YNNSOlEFNI9TR5r1P8EU=
-github.com/deadblue/elevengo v0.0.0-20191019075919-645c4d1e56bf/go.mod h1:cS11LVGBt37d7AMApYcw8Upkv7OqLtc5RB0KDZOHsbU=
 github.com/google/shlex v0.0.0-20181106134648-c34317bd91bf h1:7+FW5aGwISbqUtkfmIpZJGRgNFg2ioYPvFaUxdqpDsg=
 github.com/google/shlex v0.0.0-20181106134648-c34317bd91bf/go.mod h1:RpwtwJQFrIEPstU94h88MWPXP2ektJZ8cZ0YntAmXiE=
 github.com/gordonklaus/ineffassign v0.0.0-20180909121442-1003c8bd00dc h1:cJlkeAx1QYgO5N80aF5xRGstVsRQwgLR7uA2FnP1ZjY=
